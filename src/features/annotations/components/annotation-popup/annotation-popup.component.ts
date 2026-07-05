@@ -13,27 +13,26 @@ import { CommonModule } from '@angular/common';
 import { AnnotationService } from '../../services/annotation.service';
 
 @Component({
-  selector: 'app-annotation',
+  selector: 'app-annotation-popup',
   imports: [FormsModule, CommonModule],
   templateUrl: `./annotation-popup.component.html`,
   styleUrl: './annotation-popup.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
 })
 export class AnnotationPopupComponent {
-  public annotationService: AnnotationService = inject(AnnotationService);
+  public annotationService = inject(AnnotationService);
 
   public isShowPopup: WritableSignal<boolean> = this.annotationService.isShowPopup;
   public cursorX: WritableSignal<number> = this.annotationService.cursorX;
   public cursorY: WritableSignal<number> = this.annotationService.cursorY;
 
   public annotation: WritableSignal<string> = signal('');
-
   public hasContent: WritableSignal<boolean> = signal(false);
 
   public readonly save = output<string>();
 
-  @ContentChild('content') anotherTypeOfContent: TemplateRef<unknown> | null = null;
+  @ContentChild('content', { read: TemplateRef })
+  anotherTypeOfContent: TemplateRef<unknown> | null = null;
 
   public ngAfterContentInit(): void {
     this.hasContent.set(!!this.anotherTypeOfContent);

@@ -6,8 +6,6 @@ import { DocumentModel, DocumentPageModel } from '../models/document.model';
   providedIn: 'root',
 })
 export class DocumentMapperService {
-  constructor() {}
-
   public mapToModel(dto: DocumentDto): DocumentModel {
     return {
       name: dto.name,

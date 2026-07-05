@@ -12,10 +12,9 @@ export class DocumentRequestService {
   private http = inject(HttpClient);
   private documentMapperService = inject(DocumentMapperService);
 
-  getDocument(): Observable<DocumentModel> {
+  public getDocument(): Observable<DocumentModel> {
     return this.http.get<DocumentDto>('assets/1.json').pipe(
       delay(500),
-      tap((jsonData: DocumentDto) => console.log(jsonData)),
       map((jsonData: DocumentDto) => this.documentMapperService.mapToModel(jsonData)),
     );
   }

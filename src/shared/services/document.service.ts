@@ -7,7 +7,7 @@ import { DocumentRequestService } from '../../data-access/request-services/docum
   providedIn: 'root',
 })
 export class DocumentService {
-  public readonly documentRequestService: DocumentRequestService = inject(DocumentRequestService);
+  private readonly documentRequestService = inject(DocumentRequestService);
 
   public document: Signal<DocumentModel | null> = toSignal(
     this.documentRequestService.getDocument(),
@@ -18,14 +18,14 @@ export class DocumentService {
 
   public annotations: WritableSignal<Map<number, string[]>> = signal(new Map());
 
-  public updateAnnotationsByPageNumber(pageNumber: number, annotations: string[]) {
-    this.annotations.update((annotationsMap: Map<number, string[]>) => {
-      return annotationsMap.set(pageNumber, [...annotations]);
-    });
+  public updateAnnotationsByPageNumber(pageNumber: number, annotations: string[]): void {
+    this.annotations.update((annotationsMap: Map<number, string[]>) =>
+      annotationsMap.set(pageNumber, [...annotations]),
+    );
   }
 
   public save(): void {
-    const document = this.document();
+    const document: DocumentModel | null = this.document();
 
     if (!document) return;
 

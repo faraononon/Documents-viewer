@@ -14,7 +14,6 @@ import { ZoomService } from '../../../../shared/services/zoom.service';
 
 @Component({
   selector: 'app-annotation-badge',
-  imports: [],
   templateUrl: './annotation-badge.component.html',
   styleUrl: './annotation-badge.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,12 +25,12 @@ export class AnnotationBadgeComponent {
   public readonly containerRef: InputSignal<ElementRef<HTMLElement>> =
     input.required<ElementRef<HTMLElement>>();
 
-  @ViewChild('dragMe', { read: ElementRef }) dragRef!: ElementRef<HTMLElement>;
+  @ViewChild('drag', { read: ElementRef }) dragRef!: ElementRef<HTMLElement>;
 
   public readonly delete = output<void>();
 
-  x = signal(50);
-  y = signal(50);
+  public badgeWidth = signal(50);
+  public badgeHeight = signal(50);
 
   private isDragging = false;
   private offsetX = 0;
@@ -46,6 +45,7 @@ export class AnnotationBadgeComponent {
     this.offsetY = event.clientY - dragContainer.top;
 
     this.dragRef.nativeElement.style.cursor = 'grabbing';
+
     event.preventDefault();
   }
 
@@ -56,25 +56,25 @@ export class AnnotationBadgeComponent {
     const containerRect = this.containerRef().nativeElement.getBoundingClientRect();
     const dragContainer = this.dragRef.nativeElement.getBoundingClientRect();
 
-    let tempX = event.clientX - this.offsetX - containerRect.left;
-    let tempY = event.clientY - this.offsetY - containerRect.top;
+    let tempWidth = event.clientX - this.offsetX - containerRect.left;
+    let tempHeight = event.clientY - this.offsetY - containerRect.top;
 
-    let x = tempX / this.zoomService.scale();
-    let y = tempY / this.zoomService.scale();
+    let resultBadgeWidth = tempWidth / this.zoomService.scale();
+    let resultBadgeHeight = tempHeight / this.zoomService.scale();
 
-    const maxX = (containerRect.width - dragContainer.width) / this.zoomService.scale();
-    const maxY = (containerRect.height - dragContainer.height) / this.zoomService.scale();
+    const maxXBox = (containerRect.width - dragContainer.width) / this.zoomService.scale();
+    const maxYBox = (containerRect.height - dragContainer.height) / this.zoomService.scale();
 
-    this.x.set(Math.max(0, Math.min(x, maxX)));
-    this.y.set(Math.max(0, Math.min(y, maxY)));
+    this.badgeWidth.set(Math.max(0, Math.min(resultBadgeWidth, maxXBox)));
+    this.badgeHeight.set(Math.max(0, Math.min(resultBadgeHeight, maxYBox)));
   }
 
   @HostListener('document:mouseup')
   onUp(): void {
-    if (this.isDragging) {
-      this.isDragging = false;
-      this.dragRef.nativeElement.style.cursor = 'grab';
-    }
+    if (!this.isDragging) return;
+
+    this.isDragging = false;
+    this.dragRef.nativeElement.style.cursor = 'grab';
   }
 
   public deleteAnnotation(): void {
