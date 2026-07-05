@@ -1,0 +1,70 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 10px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.annotation-input {
+  position: fixed;
+  width: 400px;
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.3s ease;
+}
+
+.annotation-input textarea {
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+  font-size: 14px;
+  min-height: 50px;
+  resize: none;
+}
+
+.annotation-input textarea:focus {
+  outline: none;
+  border-color: lightblue;
+}
+
+.input-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  justify-content: flex-end;
+}
+
+.input-actions button {
+  padding: 4px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.input-actions button:first-of-type {
+  background: #3498db;
+  color: white;
+}
+
+.input-actions button:last-of-type {
+  background: #e74c3c;
+  color: white;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

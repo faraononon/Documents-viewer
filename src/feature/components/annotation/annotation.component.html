@@ -1,0 +1,33 @@
+@if (isShowPopup()) {
+  <div class="annotation-input" [style.left.px]="cursorX()" [style.top.px]="cursorY()">
+    <div class="annotation-content">
+      @if (anotherTypeOfContent) {
+        <ng-container
+          [ngTemplateOutlet]="anotherTypeOfContent"
+          [ngTemplateOutletContext]="{
+            annotation: annotation(),
+            setAnnotation: setAnnotation.bind(this),
+          }"
+        ></ng-container>
+      } @else {
+        <ng-container [ngTemplateOutlet]="defaultContent"></ng-container>
+      }
+    </div>
+
+    <div class="input-actions">
+      <button (click)="saveAnnotation()">Save</button>
+      <button (click)="cancelAdd()">Cancel</button>
+    </div>
+  </div>
+}
+
+<ng-template #defaultContent>
+  <textarea
+    #textarea="ngModel"
+    maxlength="100"
+    [(ngModel)]="annotation"
+    placeholder="Введите аннотацию..."
+    autofocus
+  >
+  </textarea>
+</ng-template>

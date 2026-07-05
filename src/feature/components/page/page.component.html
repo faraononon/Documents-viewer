@@ -1,0 +1,25 @@
+<div class="page-card">
+  <div class="page-image" #container>
+    <img (click)="addAnnotation($event)" [src]="page().imageUrl" [alt]="'Page ' + page().number" />
+
+    @for (annotation of this.savedAnnotations(); track annotation; let i = $index) {
+      <app-annotation-badge
+        [annotation]="annotation"
+        [containerRef]="containerRef"
+        (delete)="deleteAnnotation(i)"
+      ></app-annotation-badge>
+    }
+
+    <app-annotation (save)="saveAnnotation($event)"></app-annotation>
+
+    <!-- Мы можем передавать темплейт для того чтобы менять тип аннотаций.
+        Но на данный момент аннотация все равно будет сохранятся в строке.
+        Для более комплексного подхода нужно использовать ControlValueAccessor -->
+
+    <!-- <app-annotation>
+      <ng-template #content let-annotation="annotation" let-setAnnotation="setAnnotation">
+        <input type="text" [ngModel]="annotation" (ngModelChange)="setAnnotation($event)" />
+      </ng-template>
+    </app-annotation> -->
+  </div>
+</div>

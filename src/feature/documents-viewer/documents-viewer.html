@@ -1,0 +1,18 @@
+<div [style.zoom]="scale()">
+  <header class="actions-header">
+    <h1 class="header-text">{{ document()?.name }}</h1>
+
+    <section class="buttons">
+      <p class="zoom-level">{{ zoomLevel() + '%' }}</p>
+      <button (click)="zoomIn()" class="zoom-in">+</button>
+      <button (click)="zoomOut()" class="zoom-out">-</button>
+      <button (click)="save()" class="save-button">Сохранить</button>
+    </section>
+  </header>
+
+  <main class="document">
+    @for (page of document()?.pages; track page.number) {
+      <app-page [page]="page"></app-page>
+    }
+  </main>
+</div>

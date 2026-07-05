@@ -1,0 +1,38 @@
+.annotation-badge {
+  position: absolute;
+  background: lightcoral;
+  color: white;
+  max-width: 300px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  cursor: pointer;
+  gap: 6px;
+  backdrop-filter: blur(4px);
+  transition: transform 0.2s;
+  opacity: 0.5;
+}
+
+.annotation-badge:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+.badge-text {
+  word-break: break-word;
+}
+
+.badge-close {
+  position: absolute;
+  top: -11px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background: #e74c3c;
+  color: white;
+  cursor: pointer;
+}

@@ -1,0 +1,11 @@
+<div
+  class="annotation-badge"
+  #dragMe
+  (mousedown)="startDrag($event)"
+  [style.left.px]="x()"
+  [style.top.px]="y()"
+>
+  <span class="badge-icon">💬</span>
+  <span class="badge-text">{{ annotation() }}</span>
+  <button class="badge-close" (click)="deleteAnnotation()">X</button>
+</div>
