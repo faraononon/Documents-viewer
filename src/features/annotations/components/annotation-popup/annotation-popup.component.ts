@@ -2,29 +2,25 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
-  HostListener,
   inject,
-  Input,
-  input,
-  InputSignal,
   output,
   signal,
   TemplateRef,
   WritableSignal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AnnotationService } from '../../services/annotation.service';
 import { CommonModule } from '@angular/common';
+import { AnnotationService } from '../../services/annotation.service';
 
 @Component({
   selector: 'app-annotation',
   imports: [FormsModule, CommonModule],
-  templateUrl: `./annotation.component.html`,
-  styleUrl: './annotation.component.scss',
+  templateUrl: `./annotation-popup.component.html`,
+  styleUrl: './annotation-popup.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
 })
-export class AnnotationComponent {
+export class AnnotationPopupComponent {
   public annotationService: AnnotationService = inject(AnnotationService);
 
   public isShowPopup: WritableSignal<boolean> = this.annotationService.isShowPopup;

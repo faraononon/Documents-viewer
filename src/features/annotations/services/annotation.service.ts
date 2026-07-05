@@ -1,5 +1,5 @@
 import { inject, Injectable, signal, WritableSignal } from '@angular/core';
-import { ZoomService } from './zoom.service';
+import { ZoomService } from '../../../shared/services/zoom.service';
 
 @Injectable()
 export class AnnotationService {

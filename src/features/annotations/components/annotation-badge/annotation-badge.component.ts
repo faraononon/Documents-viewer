@@ -10,7 +10,7 @@ import {
   signal,
   ViewChild,
 } from '@angular/core';
-import { ZoomService } from '../../services/zoom.service';
+import { ZoomService } from '../../../../shared/services/zoom.service';
 
 @Component({
   selector: 'app-annotation-badge',

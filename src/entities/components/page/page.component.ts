@@ -3,27 +3,25 @@ import {
   Component,
   effect,
   ElementRef,
-  HostListener,
   inject,
   input,
   InputSignal,
-  signal,
   ViewChild,
   WritableSignal,
 } from '@angular/core';
 import { DocumentPageModel } from '../../../data-access/models/document.model';
-import { AnnotationComponent } from '../annotation/annotation.component';
-import { AnnotationService } from '../../services/annotation.service';
 import { FormsModule } from '@angular/forms';
-import { AnnotationBadgeComponent } from '../annotation-badge/annotation-badge.component';
-import { DocumentService } from '../../services/document.service';
+import { DocumentService } from '../../../shared/services/document.service';
+import { AnnotationService } from '../../../features/annotations/services/annotation.service';
+import { AnnotationPopupComponent } from '../../../features/annotations/components/annotation-popup/annotation-popup.component';
+import { AnnotationBadgeComponent } from '../../../features/annotations/components/annotation-badge/annotation-badge.component';
 
 @Component({
   selector: 'app-page',
   templateUrl: './page.component.html',
   styleUrl: './page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AnnotationComponent, AnnotationBadgeComponent, FormsModule],
+  imports: [AnnotationPopupComponent, AnnotationBadgeComponent, FormsModule],
   providers: [AnnotationService],
 })
 export class PageComponent {

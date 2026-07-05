@@ -1,14 +1,14 @@
-import { Component, computed, effect, inject, signal, Signal, WritableSignal } from '@angular/core';
-import { DocumentRequestService } from '../../data-access/request-services/document-request.service';
-import { DocumentModel } from '../../data-access/models/document.model';
-import { PageComponent } from '../components/page/page.component';
-import { ZoomService } from '../services/zoom.service';
-import { DocumentService } from '../services/document.service';
+import { Component, inject, Signal } from '@angular/core';
+import { DocumentRequestService } from '../data-access/request-services/document-request.service';
+import { DocumentModel } from '../data-access/models/document.model';
+import { ZoomService } from '../shared/services/zoom.service';
+import { DocumentService } from '../shared/services/document.service';
+import { PageComponent } from './components/page/page.component';
 
 @Component({
   selector: 'app-documents-viewer',
-  templateUrl: './documents-viewer.html',
-  styleUrl: './documents-viewer.scss',
+  templateUrl: './documents-viewer.component.html',
+  styleUrl: './documents-viewer.component.scss',
   providers: [DocumentRequestService],
   imports: [PageComponent],
 })
